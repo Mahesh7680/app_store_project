@@ -1,0 +1,29 @@
+.main-container {
+  width: 100dvw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.tabs-container {
+  display: flex;
+  margin-top: 20px;
+  gap: 2em;
+  justify-content: center;
+  align-items: center;
+}
+button {
+  background-color: transparent;
+  border: 0px;
+  gap: 20px;
+}
+hr {
+  color: black;
+  width: 70%;
+}
+.tab-items-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-self: center;
+}
