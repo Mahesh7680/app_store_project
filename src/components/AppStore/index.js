@@ -292,55 +292,75 @@ const appsList = [
   },
 ]
 
+const filteredAppItems = appsList.filter(each => each.category === 'SOCIAL')
+
 // Write your code here
 
 class AppStore extends Component {
   state = {
-    activeTabId: tabsList[0].tabId,
+    activeTabId: '',
     customAppsList: appsList,
+    searchInput: '',
   }
 
   onSearch = event => {
-    const {customAppsList} = this.state
-    const knowApps = customAppsList.map(each =>
-      each.appName.toLowerCase().includes(event.target.value).toLowerCase()
-        ? each
-        : '',
+    const {activeTabId} = this.state
+    const knowApps = appsList.filter(
+      each =>
+        each.appName.toLowerCase().includes(event.target.value.toLowerCase()) &&
+        each.category.includes(activeTabId) &&
+        each,
     )
-    console.log(knowApps)
+    this.setState({
+      customAppsList: knowApps,
+      searchInput: event.target.value,
+    })
   }
 
   onClickTabItem = tabId => {
-    this.setState({activeTabId: tabId})
-  }
-
-  getFilteredApps = () => {
-    const {activeTabId} = this.state
-    const filteredAppItems = appsList.filter(
-      each => each.category === activeTabId,
+    this.setState({
+      activeTabId: tabId,
+    })
+    const {searchInput} = this.state
+    const knowApps = appsList.filter(
+      each =>
+        each.appName.toLowerCase().includes(searchInput.toLowerCase()) &&
+        each.category.includes(tabId) &&
+        each,
     )
-    return filteredAppItems
+    this.setState({
+      //   customAppsList: appsList.filter(each => each.category === tabId),
+      customAppsList: knowApps,
+    })
   }
 
   render() {
+    // const filteredAppItems = this.getFilteredApps()
     const {activeTabId, customAppsList} = this.state
-    const filteredAppItems = this.getFilteredApps()
     return (
       <div className="main-container">
         <h1>App Store</h1>
-        <input type="search" placeholder="Search" onChange={this.onSearch} />
-        <div className="tabs-container">
+        <div className="input-search-container">
+          <input type="search" placeholder="Search" onChange={this.onSearch} />
+          <img
+            alt="search icon"
+            className="search-logo"
+            src="https://assets.ccbp.in/frontend/react-js/app-store/app-store-search-img.png"
+          />
+        </div>
+        <ul className="tabs-container">
           {tabsList.map(each => (
             <TabItem
               eachTabItem={each}
               key={each.tabId}
               onClickTabItem={this.onClickTabItem}
+              selectTabButton={each.tabId === activeTabId}
             />
           ))}
-        </div>
+        </ul>
         <hr />
         <ul className="tab-items-container">
-          {filteredAppItems.map(each => (
+          {customAppsList.map(each => (
             <AppItem eachItem={each} key={each.appId} />
           ))}
         </ul>

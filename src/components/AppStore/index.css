@@ -1,9 +1,12 @@
 .main-container {
   width: 100dvw;
   display: flex;
+  min-height: 100dvh;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
+  background-image: linear-gradient(#fff1eb, #ace0f9);
+  font-family: roboto;
 }
 
 .tabs-container {
@@ -24,6 +27,24 @@ hr {
 }
 .tab-items-container {
   display: flex;
+  /* align-self: center; */
+  justify-content: center;
   flex-wrap: wrap;
-  align-self: center;
+  padding-left: 10px;
+  gap: 1rem;
+}
+input {
+  border: 0;
+  background-color: transparent;
+}
+
+.input-search-container {
+  display: flex;
+  border: 1px solid black;
+  padding: 8px;
+  border-radius: 5px;
+}
+.search-logo {
+  height: 20px;
+  width: 20px;
 }

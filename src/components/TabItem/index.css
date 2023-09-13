@@ -4,9 +4,15 @@ img {
 }
 .app-logo-container {
   padding: 10px;
-  margin: 10px;
   text-align: center;
   background-color: #ffffff;
   border-radius: 5px;
   list-style: none;
+}
+li {
+  list-style: none;
+}
+.button-hileghter {
+  color: #2563eb;
+  text-decoration: underline;
 }
